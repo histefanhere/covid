@@ -1,0 +1,16 @@
+body {
+    margin: 0;
+    background-color: #36393F;
+    color: #DCDDDE;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#update {
+    background-color: #40444B;
+    border-radius: 8px;
+    /* margin-top: 50px; */
+    width: 40%;
+    margin: 50px auto;
+
+    padding: 10px;
+}

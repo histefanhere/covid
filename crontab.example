@@ -1,0 +1,1 @@
+*/10 * * * * /bin/bash /path/to/your/project/getsite.sh

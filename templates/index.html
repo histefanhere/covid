@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Covid Data</title>
+        <meta name="description" content="NZ Covid Updates">
+        <meta name="keywords" content="nz covid updates">
+        <link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename='styles/stylesheet.css') }}"/>
+        
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet"> 
+    </head>
+    <body>
+        <!-- <style>
+            body 
+                margin: 0;
+                background-color: #2F3136;
+            
+        </style> -->
+        <!-- <p>current date: {date}</p>
+        <p>new cases: {new_cases}</p>
+        <p>active cases: {active_cases}</p> -->
+        <div id="update">
+            **<strong>[ COVID-19 Update - {{ date }}]</strong>** <br/>
+            ———— <br/>
+            &#123;**<strong>Case Information</strong>**&#125; <br/>
+            😷 **<strong>New Community Cases: {{ new_cases }}</strong>** <br/>
+            {% for loc in locations: %}
+            📍{{ loc[2] }} {{ loc[0] }}: {{ loc[1] }} <br/>
+            {% endfor %}
+            <br/>
+            🦠 **<strong>Active cases: {{ active_cases }}</strong>** <br/>
+            💐 **<strong>{{ new_deceased }} deaths to report</strong>** (Over 24 hours) <br/>
+            ———— <br/>
+            <br/>
+            **<strong>We are expecting cases to jump around, and are continuing to see increases in COVID-19 related hospitalizations & deaths</strong>**. The Ministry of Health would like to remind everyone to self-report both **<strong>positive and negative results for RATs through My Covid Record</strong>**, to help health officials understand the size and trends of the outbreak. <br/>
+            <br/>
+            ————
+        </div>
+    </body>
+</html>
