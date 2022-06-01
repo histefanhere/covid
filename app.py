@@ -56,7 +56,7 @@ order = [
 ]
 
 def get_json_data():
-    with open('site.html', 'r') as file:
+    with open('covid-19-current-cases.html', 'r') as file:
         soup = BeautifulSoup(file, 'html.parser')
 
     # Extract the date of the update
