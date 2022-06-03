@@ -1,1 +1,1 @@
-*/10 * * * * /bin/bash /path/to/your/project/getsite.sh
+*/15 * * * * python3 /path/to/your/project/scrape_news.py

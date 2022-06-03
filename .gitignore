@@ -129,3 +129,4 @@ dmypy.json
 .pyre/
 
 covid-19-current-cases.html
+data.json

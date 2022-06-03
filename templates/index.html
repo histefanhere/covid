@@ -17,16 +17,22 @@
             **<strong>[ COVID-19 Update - {{ date }}]</strong>** <br/>
             ———— <br/>
             &#123;**<strong>Case Information</strong>**&#125; <br/>
-            😷 **<strong>New Community Cases: {{ new_cases }}</strong>** <br/>
+            😷 **<strong>New Community Cases: {{ cases }}</strong>** <br/>
+            🗓️ 7-day average: **<strong>{{ average_cases }}</strong>** ({{ average_cases_previous_week }} last week) <br/>
+            <br/>
             {% for loc in locations: %}
             📍{{ loc[2] }} {{ loc[0] }}: {{ loc[1] }} <br/>
             {% endfor %}
             <br/>
-            🦠 **<strong>Active cases: {{ active_cases }}</strong>** <br/>
-            💐 **<strong>{{ new_deceased }} deaths to report</strong>** (Over 24 hours) <br/>
             ———— <br/>
+            {**<strong>Hospitalisation Information</strong>**} <br/>
+            🏥 **<strong>{{ hospitalisations }} in Hospital</strong>** | {{ icu }} in ICU/HDU <br/>
+            🧪 **<strong>Tests conducted: {{ pcr_tests }} PCR / {{ rat_tests }} RAT </strong>** <br/>
+            🦠 **<strong>Active cases: {{ active_cases }}</strong>** <br/>
+            💐 **<strong>{{ deaths }} deaths to report</strong>** (Over 24 hours) <br/>
             <br/>
-            **<strong>We are expecting cases to jump around, and are continuing to see increases in COVID-19 related hospitalizations & deaths</strong>**. The Ministry of Health would like to remind everyone to self-report both **<strong>positive and negative results for RATs through My Covid Record</strong>**, to help health officials understand the size and trends of the outbreak. <br/>
+            ———— <br/>
+            **<strong>We are expecting cases to jump around, and are continuing to see increases in COVID-19 related hospitalisations & deaths</strong>**. The Ministry of Health would like to remind everyone to self-report both **<strong>positive and negative results for RATs through My Covid Record</strong>**, to help health officials understand the size and trends of the outbreak. <br/>
             <br/>
             ————
         </div>
