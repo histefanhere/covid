@@ -5,21 +5,28 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
+#center {
+    width: 40%;
+    margin: 30px auto;
+}
+
+p {
+    font-size: 0.8em;
+}
+
 #update {
     background-color: #40444B;
     border-radius: 8px;
-    /* margin-top: 50px; */
-    width: 40%;
-    margin: 50px auto;
+    width: 100%;
 
     padding: 10px;
 }
 
-footer {
+/* footer {
     position: fixed;
     bottom: 0;
     left: 0;
     padding-bottom: 20px;
     width: 100%;
     text-align: center;
-}
+} */

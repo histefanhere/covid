@@ -23,10 +23,15 @@ soup = BeautifulSoup(x.content, 'html.parser')
 articles = soup.find_all('li', class_='views-row')
 
 for article in articles:
-    body = article.find('span', class_='views-field-body').text
-    if "COVID-19 and vaccine update for " in body or "COVID-19 update for " in body:
+    # sometimes fails
+    # body = article.find('span', class_='views-field-body').text
+    # if "COVID-19 and vaccine update for " in body or "COVID-19 update for " in body:
+
+    title = article.find('div', class_='views-field-title').text
+    if re.search('([0-9,]+) community cases', title) and ';' in title:
 
         # We've found the latest covid update article - get its URL
+        # (any link in the article should go to its link)
         url = "https://www.health.govt.nz/" + article.find('a')['href']
 
         news = requests.get(url)
@@ -40,6 +45,9 @@ for article in articles:
         # print(news_text)
 
         out = {}
+
+        # article link
+        out['url'] = url
 
         # date of article
         date = news_soup.find('article').find('div', class_='field-name-field-published-date').text.strip()

@@ -67,20 +67,23 @@ def hello_world():
         return "<p>Failed to read data.json file</p>"
 
     # This part is dedicated to calculating and outputting the coloured squares next to each location
-    max_cases = max(data['cases_per_location'].values())
     locations = []
-    for loc in data['cases_per_location'].items():
-        name, cases = loc
+    if len(data['cases_per_location']) != 0:
+        max_cases = max(data['cases_per_location'].values())
+        for loc in data['cases_per_location'].items():
+            name, cases = loc
 
-        # IDEA: what if we considered the relative population sizes of each DHB here?
-        #       how much would that realistically change the result?
-        proportion = round(cases / max_cases, 4)
-        symbols = ('⬜', '🟩', '🟧', '🟥')
-        symbol = symbols[math.ceil(proportion * (len(symbols) - 1))]
+            # IDEA: what if we considered the relative population sizes of each DHB here?
+            #       how much would that realistically change the result?
+            proportion = round(cases / max_cases, 4)
+            symbols = ('⬜', '🟩', '🟧', '🟥')
+            symbol = symbols[math.ceil(proportion * (len(symbols) - 1))]
 
-        locations.append([name, f"{cases:,}", symbol])
+            locations.append([symbol, name, f"{cases:,}"])
 
-    locations.sort(key=lambda x: order.index(x[0]))
+        locations.sort(key=lambda x: order.index(x[1]))
+    else:
+        locations.append(["???", "???", "Locations unknown"])
 
     return render_template('index.html',
         **data,
