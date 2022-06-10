@@ -1,1 +1,1 @@
-*/15 * * * * python3 /path/to/your/project/scrape_news.py
+*/20 13-19 * * * python3 /path/to/your/project/scrape_news.py
