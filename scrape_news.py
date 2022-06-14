@@ -41,7 +41,9 @@ for article in articles:
         news_soup = BeautifulSoup(news.content, 'html.parser')
 
         news_text = news_soup.find('article').text
-        news_text = news_text.replace('\u00a0', ' ')
+        illegal_chars = ['\u00a0', '\u202f']
+        for ill_char in illegal_chars:
+            news_text = news_text.replace(ill_char, ' ')
         # print(news_text)
 
         out = {}
