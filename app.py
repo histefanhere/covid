@@ -6,30 +6,30 @@ import re
 
 app = Flask(__name__)
 
-# Not currently in use
 pops = {
-    "At the Border": 999_999_999,
-    "Auckland": 493_990,
-    "Bay of Plenty": 259_090,
-    "Canterbury": 578_290,
-    "Capital and Coast": 320_640,
-    "Counties Manukau": 578_650,
-    "Hawke's Bay": 176_110,
-    "Hutt Valley": 156_790,
-    "Lakes": 116_370,
-    "Mid Central": 186_190,
-    "Nelson Marlborough": 159_360,
     "Northland": 193_170,
+    # "Waitematā": 628_770,
+    # "Auckland": 493_990,
+    "Auckland": 628_770 + 493_990 + 578_650,
+    # "Counties Manukau": 578_650,
+    "Waikato": 436_690,
+    "Bay of Plenty": 259_090,
+    "Lakes": 116_370,
+    "Tair\u0101whiti": 49_755,
+    "Hawke\u2019s Bay": 176_110,
+    "Taranaki": 124_380,
+    "Whanganui": 68_395,
+    "MidCentral": 186_190,
+    "Wairarapa": 48_480,
+    "Hutt Valley": 156_790,
+    "Capital and Coast": 320_640,
+    "Nelson Marlborough": 159_360,
+    "West Coast": 32_550,
+    "Canterbury": 578_290,
     "South Canterbury": 61_955,
     "Southern": 344_900,
-    "Tairāwhiti": 49_755,
-    "Taranaki": 124_380,
-    "Unknown": 999_999_999,
-    "Waikato": 436_690,
-    "Wairarapa": 48_480,
-    "Waitematā": 628_770,
-    "West Coast": 32_550,
-    "Whanganui": 68_395
+    "At the Border": 999_999_999,
+    "Unknown": 999_999_999
 }
 
 order = [
@@ -69,16 +69,28 @@ def hello_world():
     # This part is dedicated to calculating and outputting the coloured squares next to each location
     locations = []
     if len(data['cases_per_location']) != 0:
-        max_cases = max(data['cases_per_location'].values())
         for loc in data['cases_per_location'].items():
             name, cases = loc
 
-            # IDEA: what if we considered the relative population sizes of each DHB here?
-            #       how much would that realistically change the result?
-            proportion = round(cases / max_cases, 4)
-            symbols = ('⬜', '🟩', '🟧', '🟥')
-            symbol = symbols[math.ceil(proportion * (len(symbols) - 1))]
+            # This 'outbreak severity algorithm' is based on the log population size for each DHB
+            # The constants are completely arbitrary and chosen by Histefanhere, if you don't agree with them
+            # feel free to complain!
+            EXPONENT_FACTOR = 1.5
+            RED_CUTOFF = 25
+            ORANGE_CUTOFF = 10
+            GREEN_CUTOFF = 1.5
 
+            proportion = cases / math.log(pops.get(name, 999_999_999), EXPONENT_FACTOR)
+
+            symbol = '⬜'
+            if proportion > RED_CUTOFF:
+                symbol = '🟥'
+            elif proportion > ORANGE_CUTOFF:
+                symbol = '🟧'
+            elif proportion > GREEN_CUTOFF:
+                symbol = '🟩'
+
+            # locations.append([symbol, name, f"{cases:,} . . . . . . . . . {pop_prop}"])
             locations.append([symbol, name, f"{cases:,}"])
 
         locations.sort(key=lambda x: order.index(x[1]))
