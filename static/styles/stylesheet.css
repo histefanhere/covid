@@ -12,6 +12,16 @@ body {
 
 p {
     font-size: 0.8em;
+
+    background-color: #40444B;
+    border-radius: 8px;
+    padding: 10px;
+
+    display: inline-block;
+}
+
+p a {
+    color: rgb(75, 75, 255);
 }
 
 #update {

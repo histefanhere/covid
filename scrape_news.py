@@ -32,7 +32,7 @@ for article in articles:
 
         # We've found the latest covid update article - get its URL
         # (any link in the article should go to its link)
-        url = "https://www.health.govt.nz/" + article.find('a')['href']
+        url = "https://www.health.govt.nz" + article.find('a')['href']
 
         news = requests.get(url)
         # with open('site2.html', 'wb') as file:
