@@ -65,7 +65,7 @@ for article in articles:
         out['average_cases_previous_week'] = reg_extract('Seven day rolling average \(as at same day last week\): ([0-9,]+)', news_text)
 
         # number of new cases
-        out['cases'] = reg_extract('Number of new community cases(?: over past two days)?: ([0-9,]+)', news_text)
+        out['cases'] = reg_extract('Number of new community cases(?: over past .+ .+)?: ([0-9,]+)', news_text)
 
         # number of currently active cases
         # For some reason this does not want to work because of the no breaking space
@@ -85,7 +85,7 @@ for article in articles:
         out['rat_tests'] = reg_extract('Number of Rapid Antigen Tests reported total \(last [0-9]+ hours\): ([0-9,]+)', news_text)
 
         # cases at each location
-        locations = reg_extract('Location of new community cases \(PCR & RAT\)(?: over past two days)?: (.+)\n', news_text).split(', ')
+        locations = reg_extract('Location of new community cases \(PCR & RAT\)(?: over past .+ .+)?: (.+)\n', news_text).split(', ')
         out['cases_per_location'] = {}
         for location in locations:
             result = re.search('(.+) \(([0-9,]+)\)', location)
