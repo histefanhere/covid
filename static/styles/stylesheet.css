@@ -6,18 +6,19 @@ body {
 }
 
 #center {
+    position: relative;
+
     width: 40%;
     margin: 30px auto;
 }
 
 p {
-    font-size: 0.8em;
-
-    background-color: #40444B;
-    border-radius: 8px;
-    padding: 10px;
-
     display: inline-block;
+
+    margin-top: 0;
+
+    font-size: 0.8em;
+    background-color: #40444B;
 }
 
 p a {
@@ -25,20 +26,33 @@ p a {
 }
 
 #update {
-    background-color: #40444B;
-    border-radius: 8px;
-    width: 100%;
-
-    padding: 10px;
-
     position: relative;
+
+    width: 100% - 20px;
+
+    background-color: #40444B;
 }
 
-/* footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    padding-bottom: 20px;
-    width: 100%;
-    text-align: center;
-} */
+#copy-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    
+    border: none;
+    width: 90px;
+
+    background-color: #0b5ed7;
+    transition: background-color 0.2s ease-out;
+    color: #DCDDDE;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+}
+
+#copy-button:hover {
+    cursor: pointer;
+}
+
+.padded {
+    border-radius: 8px;
+    padding: 10px;
+}

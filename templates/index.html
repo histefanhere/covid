@@ -12,9 +12,10 @@
     </head>
     <body>
         <div id="center">
-            <p><strong><a href="{{ url }}" target="_blank">Link to news article</a></strong> if any information is missing</p>
-            <div id="update">
+            <p class="padded"><strong><a href="{{ url }}" target="_blank">Link to news article</a></strong> if any information is missing</p>
+            <button onclick="copyText()" id="copy-button" class="padded">COPY</button>
 
+            <div id="update" class="padded">
                 <!-- GITHUB CORNERS: https://github.com/tholman/github-corners -->
                 <a href="https://github.com/histefanhere/covid" target="_blank" class="github-corner" aria-label="View source on GitHub">
                     <svg width="100" height="100" viewBox="0 0 250 250" style="fill:#DCDDDE; color:#36393F; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true">
@@ -67,4 +68,13 @@
             </div>
         </div>
     </body>
+    <script>
+        function copyText() {
+            navigator.clipboard.writeText(document.getElementById('update').innerText);
+
+            var copyButton = document.getElementById('copy-button');
+            copyButton.style.backgroundColor = '#37bd5d';
+            copyButton.innerHTML = "COPIED!";
+        }
+    </script>
 </html>
