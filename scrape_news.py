@@ -90,7 +90,7 @@ for article in articles:
         for location in locations:
             result = re.search('(.+) \(([0-9,]+)\)', location)
             if result:
-                out['cases_per_location'][result.group(1)] = int(result.group(2).replace(',', ''))
+                out['cases_per_location'][result.group(1).replace('*', '')] = int(result.group(2).replace(',', ''))
 
 
         print(out)
