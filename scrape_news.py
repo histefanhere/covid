@@ -62,15 +62,15 @@ for article in articles:
         out['average_cases'] = reg_extract('Seven day rolling average of community cases: ([0-9,]+)', news_text)
 
         # seven day rolling average of community cases from last week
-        out['average_cases_previous_week'] = reg_extract('Seven day rolling average \(as at same day last week\): ([0-9,]+)', news_text)
+        out['average_cases_previous_week'] = reg_extract('Seven day rolling average(?: of community cases)? \(as at same day last week\): ([0-9,]+)', news_text)
 
         # number of new cases
-        out['cases'] = reg_extract('Number of new community cases(?: over past .+ .+)?: ([0-9,]+)', news_text)
+        out['cases'] = reg_extract('(?:Total )?[nN]umber of new community cases(?: over past .+ .+)?: ([0-9,]+)', news_text)
 
         # number of currently active cases
         # For some reason this does not want to work because of the no breaking space
         # out['active_cases'] = reg_extract('Number of active community cases \(total\):\u00a0([0-9,]+)', news_text)
-        out['active_cases'] = reg_extract('Number of active community cases \(total\): ([0-9,]+)', news_text)
+        out['active_cases'] = reg_extract('Number of active(?: community)? cases \(total\): ([0-9,]+)', news_text)
 
         # cases in hospital
         out['hospitalisations'] = reg_extract('Cases in hospital: total number ([0-9,]+)', news_text)
@@ -92,6 +92,31 @@ for article in articles:
             if result:
                 out['cases_per_location'][result.group(1).replace('*', '')] = int(result.group(2).replace(',', ''))
 
+        # If extracting locations from the news update doesn't work, get it from the table
+        if not out['cases_per_location']:
+            x = requests.get("https://www.health.govt.nz/covid-19-novel-coronavirus/covid-19-data-and-statistics/covid-19-current-cases")
+            soup = BeautifulSoup(x.content, 'html.parser')
+
+            tables = soup.find_all('table', attrs={'class': 'table-style-two'})
+
+            # new cases per location
+            locations = {}
+            for tr in tables[5].tbody.find_all('tr'):
+                td = tr.find_all('td')
+                if td[0].text == 'Total':
+                    continue
+                locations[td[0].text] = int(td[5].text.strip('*'))
+
+            # combine auckland with Waitematā and Counties Manukau
+            locations['Auckland'] = locations['Auckland'] + locations['Waitematā'] + locations['Counties Manukau']
+            del locations['Waitematā']
+            del locations['Counties Manukau']
+
+            # fix locations to be consistent
+            locations["Hawke\u2019s Bay"] = locations.pop('Hawke\'s Bay')
+            locations["MidCentral"] = locations.pop('Mid Central')
+
+            out['cases_per_location'] = locations
 
         print(out)
 
