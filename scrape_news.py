@@ -57,6 +57,9 @@ for article in articles:
 
         # deaths
         out['deaths'] = reg_extract('reporting the deaths of ([0-9,]+)', news_text)
+        if out['deaths'] == "???":
+            title = news_soup.find('h1').text.strip()
+            out['deaths'] = reg_extract('([0-9,]+) deaths', title)
 
         # seven day rolling average of community cases
         out['average_cases'] = reg_extract('Seven day rolling average of community cases: ([0-9,]+)', news_text)
