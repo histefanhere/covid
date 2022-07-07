@@ -104,7 +104,7 @@ for article in articles:
 
             # new cases per location
             locations = {}
-            for tr in tables[5].tbody.find_all('tr'):
+            for tr in tables[4].tbody.find_all('tr'):
                 td = tr.find_all('td')
                 if td[0].text == 'Total':
                     continue
