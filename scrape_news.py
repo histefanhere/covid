@@ -108,7 +108,7 @@ for article in articles:
                 td = tr.find_all('td')
                 if td[0].text == 'Total':
                     continue
-                locations[td[0].text] = int(td[5].text.strip('*'))
+                locations[td[0].text.strip('*')] = int(td[5].text.strip('*'))
 
             # combine auckland with Waitematā and Counties Manukau
             locations['Auckland'] = locations['Auckland'] + locations['Waitematā'] + locations['Counties Manukau']
