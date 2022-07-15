@@ -76,7 +76,7 @@ for article in articles:
         out['active_cases'] = reg_extract('Number of active(?: community)? cases \(total\): ([0-9,]+)', news_text)
 
         # cases in hospital
-        out['hospitalisations'] = reg_extract('Cases in hospital: total number ([0-9,]+)', news_text)
+        out['hospitalisations'] = reg_extract('[Cc]ases in hospital: total number ([0-9,]+)', news_text)
 
         # cases in ICU or HDU
         out['icu'] = reg_extract('Cases in ICU or HDU: ([0-9,]+)', news_text)
