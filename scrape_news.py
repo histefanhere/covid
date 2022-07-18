@@ -82,7 +82,7 @@ for article in articles:
         out['icu'] = reg_extract('Cases in ICU or HDU: ([0-9,]+)', news_text)
 
         # number of new pcr tests
-        out['pcr_tests'] = reg_extract('Number of PCR tests total \(last [0-9]+ hours\): ([0-9,]+)', news_text)
+        out['pcr_tests'] = reg_extract('Number of PCR tests total \(last [0-9]+ hours\):? ([0-9,]+)', news_text)
 
         # number of new rat tests
         out['rat_tests'] = reg_extract('Number of Rapid Antigen Tests reported total \(last [0-9]+ hours\): ([0-9,]+)', news_text)
