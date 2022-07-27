@@ -60,6 +60,8 @@ for article in articles:
         if out['deaths'] == "???":
             title = news_soup.find('h1').text.strip()
             out['deaths'] = reg_extract('([0-9,]+) deaths', title)
+        if out['deaths'] == "???":
+            out['deaths'] = reg_extract('average of ([0-9,]+) deaths', news_text)
 
         # seven day rolling average of community cases
         out['average_cases'] = reg_extract('Seven day rolling average of community cases: ([0-9,]+)', news_text)
@@ -104,7 +106,7 @@ for article in articles:
 
             # new cases per location
             locations = {}
-            for tr in tables[4].tbody.find_all('tr'):
+            for tr in tables[5].tbody.find_all('tr'):
                 td = tr.find_all('td')
                 if td[0].text == 'Total':
                     continue
