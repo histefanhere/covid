@@ -46,6 +46,9 @@ for article in articles:
             news_text = news_text.replace(ill_char, ' ')
         # print(news_text)
 
+        # just remove astriks, much easier to deal with since they can pop up anywhere
+        news_text = news_text.replace('*', '')
+
         out = {}
 
         # article link
