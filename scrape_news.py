@@ -28,7 +28,7 @@ for article in articles:
     # if "COVID-19 and vaccine update for " in body or "COVID-19 update for " in body:
 
     title = article.find('div', class_='views-field-title').text
-    if re.search('([0-9,]+) community cases', title) and ';' in title:
+    if re.search('([0-9,]+) +community cases', title) and ';' in title:
 
         # We've found the latest covid update article - get its URL
         # (any link in the article should go to its link)
