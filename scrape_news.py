@@ -48,6 +48,7 @@ for article in articles:
 
         # just remove astriks, much easier to deal with since they can pop up anywhere
         news_text = news_text.replace('*', '')
+        title = news_soup.find('h1').text.strip()
 
         out = {}
 
@@ -61,7 +62,6 @@ for article in articles:
         # deaths
         out['deaths'] = reg_extract('reporting the deaths of ([0-9,]+)', news_text)
         if out['deaths'] == "???":
-            title = news_soup.find('h1').text.strip()
             out['deaths'] = reg_extract('([0-9,]+) deaths', title)
         if out['deaths'] == "???":
             out['deaths'] = reg_extract('average of ([0-9,]+) deaths', news_text)
@@ -74,6 +74,8 @@ for article in articles:
 
         # number of new cases
         out['cases'] = reg_extract('(?:Total )?[nN]umber of new community cases(?: over past .+ .+)?: ([0-9,]+)', news_text)
+        if out['cases'] == "???":
+            out['cases'] = reg_extract('([0-9,]+) community cases', title)
 
         # number of currently active cases
         # For some reason this does not want to work because of the no breaking space
